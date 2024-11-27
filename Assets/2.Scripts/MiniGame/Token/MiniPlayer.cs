@@ -71,7 +71,6 @@ public class MiniPlayer : MonoBehaviour
     {
         while (true)
         {
-            Debug.LogError($"SendClientMove : {MiniPlayerId}");
             GamePacket packet = new()
             {
                 IcePlayerMoveRequest = new()
@@ -110,7 +109,7 @@ public class MiniPlayer : MonoBehaviour
             moveInput = context.ReadValue<Vector2>();
             animator.SetBool("Move", true);
             curState = State.Move;
-            c ??= StartCoroutine(SendClientMove());
+            //c ??= StartCoroutine(SendClientMove());
         }
         else if(context.phase.Equals(InputActionPhase.Canceled))
         {
