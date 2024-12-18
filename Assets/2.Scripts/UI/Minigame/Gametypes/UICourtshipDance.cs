@@ -53,27 +53,16 @@ public class UICourtshipDance : UIBase
         }
     }
 
-    //public void Next(int teamNumber)
-    //{
-    //    boardDic[teamNumber].MakeNextBoard();
-    //}
-    
-    // 처음 실행용.
-    //public void ShowDanceBoard()
-    //{
-    //    foreach( var board in boardDic.Values)
-    //    {
-    //        board.MakeNextBoard();
-    //    }
-    //}
-
     // 카운트다운이 끝나면 실행하기
     public void StartTimer()
     {
-        timeText.gameObject.SetActive(true);
         StartCoroutine(UIUtils.DecreaseTimeCoroutine(gameData.totalTime, timeText));
     }
 
+    public void ShowTimer()
+    {
+        timeText.gameObject.SetActive(true);
+    }
 
     #region 게임오버
     public void GameOver(S2C_DanceGameOverNotification response)
@@ -108,7 +97,7 @@ public class UICourtshipDance : UIBase
             }
             rank++;
         }
-
+        timeText.gameObject.SetActive(false);
         StartCoroutine(GameOverText(teamResults, rankings, response.EndTime + 7000));
     }
 
@@ -131,7 +120,7 @@ public class UICourtshipDance : UIBase
 
         yield return new WaitForSeconds(2f);
 
-        game.BeforeGameEnd(winSessionIds);
+        game.BeforeGameEnd();
         Destroy(MinigameManager.Instance.curMap.gameObject);
         MinigameManager.Instance.boardCamera.SetActive(true);
 
@@ -148,13 +137,16 @@ public class UICourtshipDance : UIBase
         {
             // 우리 팀 처리
             myBoard.ChangeInfoPool(disconnectedSessionId, replacementSessionId);
+            myBoard.teamSessionIds.Remove(disconnectedSessionId);
         }
         else
         {
             // 남의 팀 처리
             int disconnectTeam = game.GetPlayerTeam(disconnectedSessionId);
             boardDic[disconnectTeam].ChangeInfoPool(disconnectedSessionId, replacementSessionId);
+            boardDic[disconnectTeam].teamSessionIds.Remove(disconnectedSessionId);
         }
+        game.RemovePlayers(disconnectedSessionId);
     }
     #endregion
 }
