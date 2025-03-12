@@ -5,7 +5,11 @@
 </a>
 
 ## 🎤 프로젝트 소개
-<img width="495" alt="스크린샷 2024-12-20 오전 11 54 51" src="https://github.com/user-attachments/assets/512a2dc1-3f43-4740-99d7-66a9a1567e70" />
+<div align="center">
+  <img width="45%" src="https://github.com/user-attachments/assets/512a2dc1-3f43-4740-99d7-66a9a1567e70" />
+  <img width="45%" src="https://github.com/user-attachments/assets/a7171fa9-e266-42d7-87c2-9962953c21fc" />
+</div>
+
 
 프로젝트 제작 기간 : 2024.11.13(수) ~ 2024.12.23.(월)
 
